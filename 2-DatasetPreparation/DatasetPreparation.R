@@ -496,21 +496,14 @@ property_data$built_in <- ifelse(property_data$built_in <= 1917,
                                                              ifelse(as.numeric(property_data$built_in) >= 2020,
                                                                     "2020 or later", NA))))))
 
-# Rename categories of condition                                      
-property_data <- property_data %>%
-  mutate(
-   condition = str_replace(condition, "Second hand/good condition", "Good"),
-   condition = str_replace(condition, "New housing development", "New development"),
-   condition = str_replace(condition, "Second hand/needs renovating", "Needs renovating")
-  )
+
 ########################### SAVING CLEANED DATASET #############################
 # Removing unnecessary/processed variables
 property_data_final <- property_data %>%
-  select(-location,  -title, -features, -cat_reference)
+  select(-location,  -title, -features, -cat_reference, -area, -city)
 
 
 # Saving dataset in excel
 write_xlsx(property_data_final, 'idealista_properties_cleaned.xlsx')
-
 
 
