@@ -1,4 +1,4 @@
-################################ LOAD PACKAGES #################################
+################################# LIBRARIES ####################################
 library(osmdata)    # For querying OpenStreetMap data
 library(sf)         # For handling spatial data
 library(geosphere)  # For geospatial calculations (e.g., distances)
