@@ -1,10 +1,10 @@
 ################################# LIBRARIES ####################################
-library(osmdata)    # For querying OpenStreetMap data
-library(sf)         # For handling spatial data
-library(geosphere)  # For geospatial calculations (e.g., distances)
-library(dplyr)      # For data manipulation
-library(ggplot2)    # For data visualization
-library(readxl)     # For reading Excel files
+library(osmdata)    
+library(sf)         
+library(geosphere)  
+library(dplyr)      
+library(ggplot2)   
+library(readxl)     
 
 ################################# DATA IMPORT ##################################
 data <- read_xlsx("/Users/michellehajduk/idealista_properties_cleaned.xlsx")
