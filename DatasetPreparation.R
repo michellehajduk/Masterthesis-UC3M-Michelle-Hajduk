@@ -473,15 +473,15 @@ property_data$floorLevel<- ifelse(property_data$floorLevel %in% c("multiple"),
 property_data$floorLevel <- ifelse(property_data$floorLevel %in% c("Basement", "Ground floor"),
                                    "Ground floor",
                                    ifelse(property_data$floorLevel %in% c("Mezzanine"), 
-                                          "First or second",
+                                          "1 or 2",
                                           ifelse(property_data$floorLevel %in% c("1","2"),
-                                                 "First or second",
+                                                 "1 or 2",
                                                  ifelse(property_data$floorLevel %in% c("3","4"),
-                                                        "Third or fourth",
+                                                        "3 or 4",
                                                         ifelse(property_data$floorLevel %in% c("5","6"),
-                                                               "Fith or sixth", 
+                                                               "5 or 6", 
                                                                ifelse(as.numeric(property_data$floorLevel) >= 7,
-                                                                      "Seventh or more height", property_data$floorLevel))))))
+                                                                      "7 or higher", property_data$floorLevel))))))
 # Categorizing built in 
 property_data$built_in <- ifelse(property_data$built_in <= 1917,
                                  "1917 or earlier",
@@ -496,7 +496,13 @@ property_data$built_in <- ifelse(property_data$built_in <= 1917,
                                                              ifelse(as.numeric(property_data$built_in) >= 2020,
                                                                     "2020 or later", NA))))))
 
-
+# Rename categories of condition                                      
+property_data <- property_data %>%
+  mutate(
+   condition = str_replace(condition, "Second hand/good condition", "Good"),
+   condition = str_replace(condition, "New housing development", "New development"),
+   condition = str_replace(condition, "Second hand/needs renovating", "Needs renovating")
+  )
 ########################### SAVING CLEANED DATASET #############################
 # Removing unnecessary/processed variables
 property_data_final <- property_data %>%
