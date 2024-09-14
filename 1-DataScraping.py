@@ -22,7 +22,7 @@ import nest_asyncio
 
 nest_asyncio.apply()
 
-scrapfly = ScrapflyClient(key="scp-live-2a12c883f6f548c5ba8d81d97fdf762b", max_concurrency=2)
+scrapfly = ScrapflyClient(key="your-api-key", max_concurrency=2)
 
 class PropertyDetails(TypedDict):
     url: str
