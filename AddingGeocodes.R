@@ -1,8 +1,10 @@
+################################# LIBRARIES ####################################
 library(xml2)
 library(readxl)
 library(writexl)
 library(dplyr)
 
+################################## KML FILES ####################################
 # Read and parse the KML file
 kml_file1 <- "/Users/michellehajduk/Documents/UC3M/Masterthesis/Codes/Adding Geocodes/Spain_properties_part1.kml"
 kml_file2 <- "/Users/michellehajduk/Documents/UC3M/Masterthesis/Codes/Adding Geocodes/Spain_properties_part2.kml"  
@@ -14,7 +16,7 @@ placemarks1 <- xml_find_all(kml_data1, ".//d1:Placemark", ns = c(d1 = "http://ww
 placemarks2 <- xml_find_all(kml_data2, ".//d1:Placemark", ns = c(d1 = "http://www.opengis.net/kml/2.2"))
 
 
-# Function to extract address and coordinates
+############################# EXTRACT COORDINATES ################################
 extract_data <- function(placemark) {
   address_node <- xml_find_first(placemark, ".//d1:address", ns = c(d1 = "http://www.opengis.net/kml/2.2"))
   address <- ifelse(length(address_node) > 0, xml_text(address_node), NA)
@@ -45,9 +47,8 @@ spain_properties_part2<- do.call(rbind, kml_data_list2)
 
 
 spain_properties_coordinates <- rbind(spain_properties_part1, spain_properties_part2)
-#write_xlsx(spain_properties_coordinates, "/Users/michellehajduk/addresses_spain_with_coords.xlsx" )
 
-
+################################# MERGE DATA ###################################
 # Merge coordinates to dataset
 addresses_data <- as.data.frame(read_xlsx("/Users/michellehajduk/Documents/UC3M/Masterthesis/Data/combined_data.xlsx"))
 spain_properties_coordinates <- as.data.frame(spain_properties_coordinates)
@@ -60,7 +61,7 @@ spain_properties_coordinates_unique <- spain_properties_coordinates %>%
 # Apply left join
 join <- left_join(addresses_data, spain_properties_coordinates_unique, by="address", multiple= "any")
 
-# Save data in file
+################################# SAVE DATA ####################################
 write_xlsx(join, "/Users/michellehajduk/Documents/UC3M/Masterthesis/Data/combined_data_with_coords.xlsx")
 
 
