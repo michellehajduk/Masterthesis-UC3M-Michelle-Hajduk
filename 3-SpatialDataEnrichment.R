@@ -240,4 +240,4 @@ data$distanceSchools <- ceiling(data$distanceSchools)
 head(data)
 
 # Save the final data with distances to a CSV file
-write.csv(data, "idealista_property_spatial_data.csv")
+write_xlsx(data, "idealista_properties_cleaned.xlsx")
