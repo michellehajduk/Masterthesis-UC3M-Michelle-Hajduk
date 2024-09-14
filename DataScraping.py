@@ -1,8 +1,4 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-@author: michellehajduk
-"""
+"""@author: michellehajduk"""
 # Adapted from original code by [scrapfly]
 # Original source: [https://scrapfly.io/blog/how-to-scrape-idealista/]
 # Modifications: Added nest_asyncio as well as main and write_to_csv function
