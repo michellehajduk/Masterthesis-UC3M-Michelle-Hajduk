@@ -54,7 +54,7 @@ for (variable in categorical_variables) {
           main = paste("Bar Plot of\n", variable), 
           xlab = variable, ylab = "Frequency", col = "royalblue1")
   
-  boxplot(property_data_cleaned$price_per_m2 ~ property_data_cleaned[[variable]], 
+  boxplot(log(property_data_cleaned$price_per_m2) ~ property_data_cleaned[[variable]], 
           col = "royalblue1", main = paste("Distribution of SalePrice \nby", variable),
           xlab = variable, ylab = "SalePrice")
 }
@@ -72,7 +72,7 @@ for (variable in categorical_variables) {
           main = paste("Bar Plot of\n", variable), 
           xlab = variable, ylab = "Frequency", col = "royalblue1")
   
-  boxplot(property_data_cleaned2$price_per_m2 ~ property_data_cleaned2[[variable]], 
+  boxplot(log(property_data_cleaned2$price_per_m2) ~ property_data_cleaned2[[variable]], 
           col = "royalblue1", main = paste("Distribution of \nSalePrice by", variable),
           xlab = variable, ylab = "SalePrice")
 }
@@ -80,8 +80,10 @@ for (variable in categorical_variables) {
 
 ## Visualizing Numerical Variables
 # Use ggpairs to visualize relationships between numerical variables.
+par(mfrow = c(1, 1))
 numerical_variables <- c("m2_built", "landPlot", "bedrooms", "lat", "lon", "bathrooms", "numFloors", "distanceTrainStation", "distanceHospitals", "distanceSchools", "price_per_m2")
 ggpairs(property_data_cleaned2[, numerical_variables])
+
 property_data_cleaned2 <- property_data_cleaned2[, -which(names(property_data_cleaned2) %in% c("lat", "lon"))]
 
 ################################# SKEWNESS ####################################
