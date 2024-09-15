@@ -1,0 +1,7 @@
+Before running the application, please navigate to the directory containing the random forest split model files (Masterthesis-UC3M-Michelle-Hajduk/6-ShinyApp/Models) using the command:
+cd /path/to-your-file
+
+Next, combine the split files into a single .RData file with the following command:
+cat rf_model_part* > rf_model_combined.RData
+
+Replace /path/to-your-file with the actual path to your files. This step ensures that the application has access to the complete model. Otherwise the application will not work.
