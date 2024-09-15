@@ -82,6 +82,7 @@ for (variable in categorical_variables) {
 # Use ggpairs to visualize relationships between numerical variables.
 numerical_variables <- c("m2_built", "landPlot", "bedrooms", "lat", "lon", "bathrooms", "numFloors", "distanceTrainStation", "distanceHospitals", "distanceSchools", "price_per_m2")
 ggpairs(property_data_cleaned2[, numerical_variables])
+property_data_cleaned2 <- property_data_cleaned2[, -which(names(property_data_cleaned2) %in% c("lat", "lon"))]
 
 ################################# SKEWNESS ####################################
 # Check skewness of numerical variables.
@@ -176,8 +177,8 @@ property_data_cleaned3 <- subset(property_data_cleaned2,
 ############################ FEATURE SELECTION #################################
 ## Linear Model for Feature Selection
 # Build null and full models for stepwise regression
-null_model <- lm(price_per_m2 ~ 1, data = property_data_cleaned3)  # Null model with only intercept
-full_model <- lm(price_per_m2 ~ ., data = property_data_cleaned3)  # Full model with all features
+null_model <- lm(price_per_m2 ~ 1, data = property_data_cleaned3)  
+full_model <- lm(price_per_m2 ~ ., data = property_data_cleaned3)  
 
 # Perform stepwise selection to choose the best subset of features
 set.seed(999) 
@@ -213,20 +214,20 @@ property_data_cleaned3 <- property_data_cleaned3[, -which(names(property_data_cl
 
 ## Check for Multicollinearity
 # Check aliasing in the linear model to identify collinear variables
-alias(selected_model)
+alias(full_model)
 
 # Remove 'autonomous_community' due to aliasing with 'province'
 property_data_cleaned3 <- property_data_cleaned3[, -which(names(property_data_cleaned3) %in% c("autonomous_community"))]
 
 # Calculate Variance Inflation Factor for multicollinearity
-final_model <- selected_model$finalModel
-vif(final_model)
+full_model <- lm(price_per_m2 ~ ., data = property_data_cleaned3)
+vif(full_model)
 
 ## Interaction between 'propertyType' and 'hasLift' identified
 table(property_data_cleaned3$propertyType, property_data_cleaned3$hasLift)
 
 ## Feature Importance with caret
-importance <- varImp(final_model, scale = FALSE)
+importance <- varImp(full_model, scale = FALSE)
 sorted_importance <- importance[order(-importance$Overall), ]
 print(sorted_importance)
 
