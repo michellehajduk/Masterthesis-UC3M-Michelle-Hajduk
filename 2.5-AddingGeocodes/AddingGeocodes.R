@@ -4,8 +4,8 @@ library(writexl)
 library(dplyr)
 
 # Read and parse the KML file
-kml_file1 <- "/Users/michellehajduk/Documents/UC3M/Masterthesis/Codes/Adding Geocodes/Spain_properties_part1.kml"
-kml_file2 <- "/Users/michellehajduk/Documents/UC3M/Masterthesis/Codes/Adding Geocodes/Spain_properties_part2.kml"  
+kml_file1 <- "Spain_properties_part1.kml"
+kml_file2 <- "Spain_properties_part2.kml"  
 
 kml_data1 <- read_xml(kml_file1)
 kml_data2 <- read_xml(kml_file2)
@@ -49,7 +49,7 @@ spain_properties_coordinates <- rbind(spain_properties_part1, spain_properties_p
 
 
 # Merge coordinates to dataset
-addresses_data <- as.data.frame(read_xlsx("/Users/michellehajduk/Documents/UC3M/Masterthesis/Data/combined_data.xlsx"))
+addresses_data <- as.data.frame(read_xlsx("combined_data.xlsx"))
 spain_properties_coordinates <- as.data.frame(spain_properties_coordinates)
 addresses_data$address <- paste(addresses_data$street, addresses_data$city, addresses_data$autonomous_community, sep = " ")
 addresses_data$address <- trimws(addresses_data$address)
@@ -61,6 +61,6 @@ spain_properties_coordinates_unique <- spain_properties_coordinates %>%
 join <- left_join(addresses_data, spain_properties_coordinates_unique, by="address", multiple= "any")
 
 # Save data in file
-write_xlsx(join, "/Users/michellehajduk/Documents/UC3M/Masterthesis/Data/combined_data_with_coords.xlsx")
+write_xlsx(join, "combined_data_with_coords.xlsx")
 
 
