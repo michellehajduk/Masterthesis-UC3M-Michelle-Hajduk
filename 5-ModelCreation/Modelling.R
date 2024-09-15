@@ -6,7 +6,7 @@ library(xgboost)
 library(readxl)
 
 ################################# LOAD DATA ####################################
-property_data_final <- read_xlsx("/Users/michellehajduk/Documents/UC3M/Masterthesis/Codes/Modelling/property_data_final.xlsx")
+property_data_final <- read_xlsx("property_data_final.xlsx")
 
 ############################## TRAIN CONTROL ###################################
 # Set up cross-validation with 10 folds
