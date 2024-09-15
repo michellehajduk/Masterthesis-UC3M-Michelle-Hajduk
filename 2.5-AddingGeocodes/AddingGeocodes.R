@@ -4,11 +4,8 @@ library(writexl)
 library(dplyr)
 
 # Read and parse the KML file
-kml_file1 <- "Spain_properties_part1.kml"
-kml_file2 <- "Spain_properties_part2.kml"  
-
-kml_data1 <- read_xml(kml_file1)
-kml_data2 <- read_xml(kml_file2)
+kml_data1 <- read_xml("Spain_properties_part1.kml")
+kml_data2 <- read_xml("Spain_properties_part2.kml" )
 
 placemarks1 <- xml_find_all(kml_data1, ".//d1:Placemark", ns = c(d1 = "http://www.opengis.net/kml/2.2"))
 placemarks2 <- xml_find_all(kml_data2, ".//d1:Placemark", ns = c(d1 = "http://www.opengis.net/kml/2.2"))
