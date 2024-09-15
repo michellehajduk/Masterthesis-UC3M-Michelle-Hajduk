@@ -12,6 +12,9 @@ library(readxl)
 ############################# COMBINING DATASETS ###############################
 # Load all scraped CSV files from the specified directory into a single dataframe
 
+# The single regional datasets are not included in this repository but the final result 
+# "combined_data" is saved in the "2.5-AddingGeocodes" folder
+
 file_paths <- list.files(
   path = "/Users/michellehajduk/Documents/UC3M/Masterthesis/Data/Properties_new", 
   pattern = "*.csv", 
@@ -40,7 +43,7 @@ write_xlsx(combined_data, "combined_data.xlsx")
 # Filename "AddingGeocodes"
 
 # Read the processed data with geocodes from an Excel file
-property_data <- read_xlsx("/Users/michellehajduk/Documents/UC3M/Masterthesis/Data/combined_data_with_coords.xlsx")
+property_data <- read_xlsx("combined_data_with_coords.xlsx")
 property_data <- as.data.frame(property_data)
 str(property_data)
 
@@ -500,8 +503,7 @@ property_data$built_in <- ifelse(property_data$built_in <= 1917,
 ########################### SAVING CLEANED DATASET #############################
 # Removing unnecessary/processed variables
 property_data_final <- property_data %>%
-  select(-location,  -title, -features, -cat_reference, -area, -city)
-
+  select(-location,  -title, -area, -city, -street, -url, -location, -features, -cat_reference, -area, -city)
 
 # Saving dataset in excel
 write_xlsx(property_data_final, 'idealista_properties_cleaned.xlsx')
