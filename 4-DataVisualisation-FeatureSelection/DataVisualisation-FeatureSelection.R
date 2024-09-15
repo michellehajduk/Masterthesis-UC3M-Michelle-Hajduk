@@ -11,7 +11,7 @@ library(randomForest)
 library(car)
 
 ################################ LOADING DATA ##################################
-property_data_cleaned <- read_xlsx("/Users/michellehajduk/Documents/UC3M/Masterthesis/Data/idealista_properties_cleaned.xlsx")
+property_data_cleaned <- read_xlsx("idealista_properties_cleaned.xlsx")
 property_data_cleaned <- as.data.frame(property_data_cleaned)
 
 # Verify there are no missing values in the dataset, there shouldn't be any
@@ -245,4 +245,4 @@ print(sorted_importance)
 property_data_cleaned3 <- property_data_cleaned3[, -which(names(property_data_cleaned3) %in% c("hasLift"))]
 
 ############################### FINAL DATASET ##################################
-write_xlsx(property_data_cleaned3, "/Users/michellehajduk/Documents/UC3M/Masterthesis/property_data_final.xlsx")
+write_xlsx(property_data_cleaned3, "property_data_final.xlsx")
