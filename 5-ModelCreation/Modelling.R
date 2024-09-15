@@ -3,6 +3,7 @@ library(caret)
 library(randomForest)
 library(glmnet)
 library(xgboost)
+library(readxl)
 
 ################################# LOAD DATA ####################################
 property_data_final <- read_xlsx("/Users/michellehajduk/Documents/UC3M/Masterthesis/Codes/Modelling/property_data_final.xlsx")
