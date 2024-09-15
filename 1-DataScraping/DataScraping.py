@@ -22,6 +22,7 @@ import nest_asyncio
 
 nest_asyncio.apply()
 
+# A personal API key provided by scrapfly has to be entered here
 scrapfly = ScrapflyClient(key="your-api-key", max_concurrency=2)
 
 class PropertyDetails(TypedDict):
