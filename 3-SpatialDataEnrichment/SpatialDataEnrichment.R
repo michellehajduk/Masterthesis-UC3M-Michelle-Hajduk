@@ -7,7 +7,7 @@ library(ggplot2)
 library(readxl)     
 
 ################################# DATA IMPORT ##################################
-data <- read_xlsx("/Users/michellehajduk/idealista_properties_cleaned.xlsx")
+data <- read_xlsx("idealista_properties_cleaned.xlsx")
 
 
 ############################ QUERY TRAIN STATIONS ##############################
@@ -80,7 +80,7 @@ for (i in 1:nrow(data)) {
   }
 }
 
-############################# QUERY HOSPITALS ###############################
+############################### QUERY HOSPITALS ################################
 # Define bounding boxes for different regions to find hospitals
 bbox_north <- c(-9.5, 42.2, 3.5, 43.5)
 bbox_south <- c(-9.5, 36.9, 3.5, 37.5)
@@ -164,7 +164,7 @@ for (i in 1:nrow(data)) {
   }
 }
 
-############################# QUERY SCHOOLS ###############################
+################################ QUERY SCHOOLS #################################
 # Query for schools in different regions
 query_schools_in_bbox <- function(bbox) {
   opq(bbox = bbox) %>%
@@ -231,13 +231,14 @@ for (i in 1:nrow(data)) {
   }
 }
 
+################################## CEIL DATA  ##################################
 # Round distances to nearest integer
 data$distanceTrainStation <- ceiling(data$distanceTrainStation)
 data$distanceHospitals <- ceiling(data$distanceHospitals)
 data$distanceSchools <- ceiling(data$distanceSchools)
 
-# Display the first few rows of the updated data
 head(data)
 
-# Save the final data with distances to a CSV file
+################################## SAVE DATA ###################################
+# Save the final data with distances to a file
 write_xlsx(data, "idealista_properties_cleaned.xlsx")
